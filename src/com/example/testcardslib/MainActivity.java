@@ -29,10 +29,8 @@ public class MainActivity extends Activity {
 
         ArrayList<Card> cards = new ArrayList<Card>();
         for (int i=0;i<10;i++){
-            NewCardSwitch card = new NewCardSwitch(getApplicationContext());
-            cards.add(card);  
-            //CardSeekbar card2 = new CardSeekbar(getApplicationContext(),i*10);
-            //cards.add(card2);  
+            NewCardSwitch card = new NewCardSwitch(getApplicationContext(),"Title "+i);
+            cards.add(card);
         }
         
         CardArrayAdapter mCardArrayAdapter = new CardArrayAdapter(getApplicationContext(),cards);

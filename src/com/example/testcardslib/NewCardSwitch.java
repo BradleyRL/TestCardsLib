@@ -3,54 +3,45 @@ package com.example.testcardslib;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 
-public class NewCardSwitch extends Card{	
+public class NewCardSwitch extends Card{
 	
-	public NewCardSwitch(Context context) {
-		this(context, R.layout.new_card_switch);		
+	protected Boolean create=false;
+	protected String title;
+	protected Context context;
+	
+	public NewCardSwitch(Context context, String title) {
+		super(context, R.layout.new_card_switch);
+		this.title=title;
+		this.context=context;
+		init();
 	}
 	
-	public NewCardSwitch(Context context, int innerLayout) {
-        super(context, innerLayout);
-        init(context);
-    }
 	
-	private void init(Context context){				
+	private void init(){				
 		CardHeader header = new CardHeader(context);
-        header.setTitle("title");        
+        header.setTitle(title);        
         header.setButtonExpandVisible(true);
         addCardHeader(header);
         
         InfoExpandCard expand = new InfoExpandCard(context);
         addCardExpand(expand);
-                
+        this.create=true;        
     }
 	
-	boolean mChecked=true;
+	
 	
 	@Override
     public void setupInnerViewElements(ViewGroup parent, View view) {  
 		if (view == null) return;
-		Switch mySwitch = (Switch) view.findViewById(R.id.toggle);
-		mySwitch.setChecked(mChecked);
-		mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-		
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				// TODO Auto-generated method stub
-				if (isChecked) 
-					mChecked=true;
-                else 
-                   mChecked=false;	
-			}
-  });
-
+		if (this.create) {
+			Switch mySwitch = (Switch) view.findViewById(R.id.toggle);
+			mySwitch.setChecked(true);
+			this.create=!this.create;
+		}
     }
 	
 	@Override
