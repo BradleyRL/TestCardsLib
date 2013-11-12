@@ -3,7 +3,9 @@ package com.example.testcardslib;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 
@@ -29,11 +31,26 @@ public class NewCardSwitch extends Card{
                 
     }
 	
+	boolean mChecked=true;
+	
 	@Override
     public void setupInnerViewElements(ViewGroup parent, View view) {  
 		if (view == null) return;
 		Switch mySwitch = (Switch) view.findViewById(R.id.toggle);
-		mySwitch.setChecked(true);
+		mySwitch.setChecked(mChecked);
+		mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				// TODO Auto-generated method stub
+				if (isChecked) 
+					mChecked=true;
+                else 
+                   mChecked=false;	
+			}
+  });
+
     }
 	
 	@Override
