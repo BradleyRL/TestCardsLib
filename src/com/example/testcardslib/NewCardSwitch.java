@@ -3,6 +3,7 @@ package com.example.testcardslib;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 
@@ -29,7 +30,10 @@ public class NewCardSwitch extends Card{
     }
 	
 	@Override
-    public void setupInnerViewElements(ViewGroup parent, View view) {       
+    public void setupInnerViewElements(ViewGroup parent, View view) {  
+		if (view == null) return;
+		Switch mySwitch = (Switch) view.findViewById(R.id.toggle);
+		mySwitch.setChecked(true);
     }
 	
 	@Override
