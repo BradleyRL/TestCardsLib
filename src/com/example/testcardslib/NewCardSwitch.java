@@ -37,14 +37,21 @@ public class NewCardSwitch extends Card{
 	@Override
     public void setupInnerViewElements(ViewGroup parent, View view) {  
 		if (view == null) return;
-		if (this.create) {
-			Switch mySwitch = (Switch) view.findViewById(R.id.toggle);
-			mySwitch.setChecked(true);
-			this.create=!this.create;
-		}
+		//if (this.create) {
+        Switch mySwitch = (Switch) view.findViewById(R.id.toggle);
+        mySwitch.setChecked(create);
+        mySwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Switch sw= (Switch)v;
+                create=sw.isChecked();
+            }
+        });
+
+		//}
     }
-	
-	@Override
+
+    @Override
     public int getType() {
         return 0;
     }
