@@ -30,6 +30,9 @@ public class MainActivity extends Activity {
         ArrayList<Card> cards = new ArrayList<Card>();
         for (int i=0;i<10;i++){
             NewCardSwitch card = new NewCardSwitch(getApplicationContext(),"Title "+i);
+        	//SomeOtherCard card = new SomeOtherCard(getApplicationContext(),"Title "+i);
+            card.setClickable(false);
+            card.setLongClickable(false);
             cards.add(card);
         }
         

@@ -1,25 +1,24 @@
 package com.example.testcardslib;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.TextView;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 
-public class NewCardSwitch extends Card{
+public class SomeOtherCard extends Card{
 	
-	protected Boolean create=false;	
+	
 	protected String title;
+	protected String innertitle;
 	protected Context context;
 	
-	public NewCardSwitch(Context context, String title) {
-		super(context, R.layout.new_card_switch);
+	public SomeOtherCard(Context context, String title) {
+		super(context, R.layout.some_other_card);
 		this.title=title;
 		this.context=context;
+		this.innertitle=title;
 		init();
 	}
 	
@@ -32,8 +31,9 @@ public class NewCardSwitch extends Card{
         
         InfoExpandCard expand = new InfoExpandCard(context);
         addCardExpand(expand);
-        this.create=true;
         
+        
+                
     }
 	
 	
@@ -41,20 +41,19 @@ public class NewCardSwitch extends Card{
 	@Override
     public void setupInnerViewElements(ViewGroup parent, View view) {  
 		if (view == null) return;
-				
-        Switch mySwitch = (Switch) view.findViewById(R.id.toggle);
-        mySwitch.setOnCheckedChangeListener(null);
-        mySwitch.setChecked(create);
+		
+        TextView myText = (TextView) view.findViewById(R.id.text);
+        myText.setText(innertitle);
         
-        mySwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {            
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				// TODO Auto-generated method stub
-				create=isChecked;
-				Log.d("Switch_Test", "OnClickCalled...");
-			}
+        setOnClickListener(new Card.OnCardClickListener() {
+            @Override
+            public void onClick(Card card, View view) {
+            	TextView myText = (TextView) view.findViewById(R.id.text);
+                myText.setText("changed text");
+                innertitle="changed text";
+            }
         });
-        
+		
     }
 
     @Override
